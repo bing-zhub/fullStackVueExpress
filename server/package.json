@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "concat-stream": "^1.6.2",
+    "cors": "^2.8.4",
+    "deep-is": "^0.1.3",
+    "eslint": "^4.19.1",
+    "express": "^4.16.3",
+    "fast-levenshtein": "^2.0.6",
+    "joi": "^13.2.0",
+    "levn": "^0.3.0",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0",
+    "mysql2": "^1.5.3",
+    "prelude-ls": "^1.1.2",
+    "sequelize": "^4.37.6",
+    "type-check": "^0.3.2"
+  }
+}
