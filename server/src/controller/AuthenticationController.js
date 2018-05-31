@@ -11,5 +11,39 @@ module.exports = {
             })
         }
         
+    },
+
+    async login (req, res) {
+        try{
+            const {email, password} = req.body
+            const user = await User.findOne({
+                where: {
+                    email: email
+                }
+            })
+
+            if(!user){
+                return res.status(403).send({
+                    error: "The login information is incorrect"
+                })
+            }
+
+            const isPasswordValid = password === user.password
+
+            if(!isPasswordValid){
+                return res.status(403).send({
+                    error: "The login information is incorrect"
+                })
+            }
+
+            const userJson = user.toJSON()
+            res.send({
+                user:userJson
+            })
+        }catch (err) {
+            res.status(403).send({
+                error:"Invalid login information"
+            })
+        }
     }
 }
