@@ -46,7 +46,8 @@ export default {
           email: this.email,
           password: this.password
         })
-        console.log(response.data.user.email)
+        console.log(response.data.user)
+        console.log(response.data.token)
       } catch (err) {
         this.error = err.response.data.error
       }
