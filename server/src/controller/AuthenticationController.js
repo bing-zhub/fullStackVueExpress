@@ -1,6 +1,8 @@
 const {User} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
+const Promise = require('bluebird')
+const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs')) 
 
 function jwtSignUser (user) {
     const ONE_WEEK = 7 * 24 * 60 *60;
@@ -15,12 +17,10 @@ module.exports = {
             const user = await User.create(req.body)
             res.send(user.toJSON())
         }catch (err){
-            console.log(err)
             res.status(400).send({
                 error:"this email is already in use."
             })
         }
-        
     },
 
     async login (req, res) {
@@ -31,7 +31,7 @@ module.exports = {
                     email: email
                 }
             })
- 
+
             if(!user){
                 return res.status(403).send({
                     error: "The user is not found"
@@ -39,6 +39,7 @@ module.exports = {
             }
             
             const isPasswordValid = await user.comparePassword(password)
+            console.log(isPasswordValid)
             if(!isPasswordValid){
                 return res.status(403).send({
                     error: "The password does not match"
@@ -51,8 +52,7 @@ module.exports = {
                 token: jwtSignUser(userJson)
             })
         }catch (err) {
-            console.log(err)
-            res.status(403).send({
+            res.status(500).send({
                 error:"Sth wrong , try again later"
             })
         }

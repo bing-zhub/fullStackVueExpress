@@ -5,7 +5,7 @@ function hashPassword (user, options) {
     const SALT_FACTOR = 8
     console.log("hashPassword")
     if(!user.changed('password')) {
-        return;
+        return
     }
 
     return bcrypt
@@ -23,14 +23,14 @@ module.exports = (sequelize, DataTypes) => {
         password: DataTypes.STRING
     },{
         hooks: {
-            beforeCreate: hashPassword,
-            beforeUpdate: hashPassword,
             beforeSave: hashPassword
         }
     })
 
     User.prototype.comparePassword = function (password) {
-        return bcrypt.compareAsync(password, this.password)
+        valid =  bcrypt.compareAsync(password, this.password)
+        console.log(valid)
+        return valid
     }
 
     return User
