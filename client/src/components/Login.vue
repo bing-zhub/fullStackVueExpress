@@ -4,11 +4,7 @@
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm80 md4>
-            <v-card class="elevation-12">
-              <v-toolbar dark color="primary">
-                <v-toolbar-title>Login</v-toolbar-title>
-                <v-spacer></v-spacer>
-              </v-toolbar>
+            <panel title='Login'>
               <v-card-text>
                 <v-form autocomplete="off">
                   <v-text-field prepend-icon="person" palceholder="email" name="login" label="Login" type="text" v-model="email" autocomplete="new-password"></v-text-field>
@@ -19,7 +15,7 @@
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click.stop="dialog = !dialog " @click="login">Login</v-btn>
               </v-card-actions>
-            </v-card>
+            </panel>
             <v-dialog v-model="dialog" max-width="500px">
               <v-card>
                 <v-card-title>
@@ -43,6 +39,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
 
 require('../../node_modules/material-icons/iconfont/material-icons.css')
 
@@ -69,6 +66,9 @@ export default {
         this.message = err.response
       }
     }
+  },
+  components: {
+    Panel
   },
   props: {
     source: String

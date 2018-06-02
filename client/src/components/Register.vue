@@ -3,13 +3,8 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <!-- 位置需要调整一下 -->
           <v-flex xs12 sm8 md4>
-            <v-card class="elevation-12">
-              <v-toolbar dark color="primary">
-                <v-toolbar-title>Register</v-toolbar-title>
-                <v-spacer></v-spacer>
-              </v-toolbar>
+            <panel title="Register">
               <v-card-text>
                 <v-form autocomplete="off">
                   <v-text-field prepend-icon="person" palceholder="email" name="login" label="Email" type="text" v-model="email"></v-text-field>
@@ -21,7 +16,7 @@
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click.stop="dialog = !dialog" @click="register">Sigup</v-btn>
               </v-card-actions>
-            </v-card>
+            </panel>
             <v-dialog v-model="dialog" max-width="500px">
               <v-card>
                 <v-card-title>
@@ -45,6 +40,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
 
 require('../../node_modules/material-icons/iconfont/material-icons.css')
 
@@ -78,6 +74,9 @@ export default {
         this.message = err.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   },
   props: {
     source: String
