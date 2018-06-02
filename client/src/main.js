@@ -7,7 +7,11 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import { sync } from 'vuex-router-sync'
 import store from '@/store/store'
+import fontawesome from '@fortawesome/fontawesome'
+import brands from '@fortawesome/fontawesome-free-brands'
+import { faSpinner } from '@fortawesome/fontawesome-free-solid'
 
+fontawesome.library.add(brands, faSpinner)
 Vue.use(Vuetify)
 sync(store, router)
 Vue.config.productionTip = false
