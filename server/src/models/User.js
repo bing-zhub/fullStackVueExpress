@@ -3,7 +3,6 @@ const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'))
 
 function hashPassword (user, options) {
     const SALT_FACTOR = 8
-    console.log("hashPassword")
     if(!user.changed('password')) {
         return
     }
@@ -28,9 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     User.prototype.comparePassword = function (password) {
-        valid =  bcrypt.compareAsync(password, this.password)
-        console.log(valid)
-        return valid
+        return bcrypt.compareAsync(password, this.password)
     }
 
     return User

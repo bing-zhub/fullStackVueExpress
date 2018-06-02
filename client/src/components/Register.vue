@@ -11,9 +11,10 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form autocomplete="off">
                   <v-text-field prepend-icon="person" palceholder="email" name="login" label="Email" type="text" v-model="email"></v-text-field>
-                  <v-text-field prepend-icon="lock" palceholder="password" name="password" label="Password" id="password" type="password" v-model="password"></v-text-field>
+                  <v-text-field prepend-icon="lock" palceholder="password" name="password" label="Password" id="password1" type="password" v-model="password1" autocomplete="new-password"></v-text-field>
+                  <v-text-field prepend-icon="lock" palceholder="password" name="password" label="Confirm Password" id="password2" type="password" v-model="password2" autocomplete="new-password"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -51,7 +52,8 @@ export default {
   data () {
     return {
       email: '',
-      password: '',
+      password1: '',
+      password2: '',
       error: null,
       drawer: null,
       dialog: false,
@@ -61,11 +63,17 @@ export default {
   methods: {
     async register () {
       try {
-        const response = await AuthenticationService.register({
-          email: this.email,
-          password: this.password
-        })
-        console.log(response.data.message)
+        if (this.password1 !== this.password2) {
+          this.message = '两次密码输入不一致,请重试'
+        } else {
+          const response = await AuthenticationService.register({
+            email: this.email,
+            password: this.password
+          })
+          this.message = '登录成功'
+          this.$store.dispatch('setToken', response.data.token)
+          this.$store.dispatch('setUser', response.data.user)
+        }
       } catch (err) {
         this.message = err.response.data.error
       }
