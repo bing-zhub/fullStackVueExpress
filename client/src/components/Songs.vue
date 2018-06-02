@@ -9,8 +9,12 @@
                 dark
                 color="blue darken-1"
                 v-for="song in songs"
-                :key="song.title">
-                <v-card-text>{{song.title}} | {{song.author}} | {{song.album}}</v-card-text>
+                :key="song.id">
+                <v-card-text>{{song.title}} |
+                  {{song.artist}} | {{song.album}} |
+                  {{song.genre}} | {{song.albumImageUrl}} |
+                  {{song.youtubeID}} | {{song.lyrics}} |
+                  {{song.tab}}</v-card-text>
               </v-card>
               <v-spacer></v-spacer>
             </panel>
@@ -33,7 +37,7 @@ export default {
     }
   },
   async mounted () {
-    this.songs = await SongsService.index()
+    this.songs = (await SongsService.index()).data
   }
 }
 </script>

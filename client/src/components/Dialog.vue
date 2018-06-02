@@ -21,7 +21,11 @@ export default {
       dialog: false,
       message: ''
     }
-  }
+  },
+  props: [
+    'dialog',
+    'message'
+  ]
 }
 </script>
 
