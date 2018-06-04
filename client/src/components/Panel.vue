@@ -3,6 +3,7 @@
     <v-toolbar dark color="primary">
       <v-toolbar-title>{{title}}</v-toolbar-title>
       <v-spacer></v-spacer>
+      <slot name="action"></slot>
     </v-toolbar>
     <slot>
       No Data is defined
@@ -17,7 +18,14 @@ export default {
   },
   props: [
     'title'
-  ]
+  ],
+  methods: {
+    naviTo (des) {
+      this.$route.push({
+        name: des
+      })
+    }
+  }
 }
 </script>
 <style>

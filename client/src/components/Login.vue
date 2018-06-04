@@ -62,8 +62,7 @@ export default {
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
       } catch (err) {
-        this.error = err.response.data.error
-        this.message = err.response
+        this.message = err.response.data.error
       }
     }
   },

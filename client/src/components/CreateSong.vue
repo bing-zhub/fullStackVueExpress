@@ -7,14 +7,70 @@
             <panel title="Song Metadata">
               <v-card-text>
                 <v-form>
-                  <v-text-field label="Title" type="text" v-model="title"></v-text-field>
-                  <v-text-field label="Aritist" type="text" v-model="aritist"></v-text-field>
-                  <v-text-field label="Genre" type="text" v-model="genre"></v-text-field>
-                  <v-text-field label="Album" type="text" v-model="album"></v-text-field>
-                  <v-text-field label="AlbumImageUrl" type="text" v-model="albumImageUrl"></v-text-field>
-                  <v-text-field label="YoutubeID" type="text" v-model="youtubeID"></v-text-field>
-                  <v-text-field label="Lyrics" type="text" v-model="lyrics" multi-line></v-text-field>
-                  <v-text-field label="Tab" type="text" v-model="tab" multi-line></v-text-field>
+                  <v-text-field
+                    label="Title"
+                    type="text"
+                    required
+                    :rules="[rules.required]"
+                    v-model="song.title">
+                  </v-text-field>
+
+                  <v-text-field
+                    label="Aritist"
+                    type="text"
+                    required
+                    :rules="[rules.required]"
+                    v-model="song.aritist">
+                  </v-text-field>
+
+                  <v-text-field
+                    label="Genre"
+                    type="text"
+                    required
+                    :rules="[rules.required]"
+                    v-model="song.genre">
+                  </v-text-field>
+
+                  <v-text-field
+                    label="Album"
+                    type="text"
+                    required
+                    :rules="[rules.required]"
+                    v-model="song.album">
+                  </v-text-field>
+
+                  <v-text-field
+                    label="AlbumImageUrl"
+                    type="text"
+                    required
+                    :rules="[rules.required]"
+                    v-model="song.albumImageUrl">
+                  </v-text-field>
+
+                  <v-text-field
+                    label="YoutubeID"
+                    type="text"
+                    required
+                    :rules="[rules.required]"
+                    v-model="song.youtubeID">
+                  </v-text-field>
+
+                  <v-text-field
+                    label="Tab"
+                    type="text"
+                    required
+                    :rules="[rules.required]"
+                    v-model="song.tab">
+                  </v-text-field>
+
+                  <v-text-field
+                    label="Lyrics"
+                    type="text"
+                    required
+                    :rules="[rules.required]"
+                    v-model="song.lyrics"
+                    multi-line>
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -32,7 +88,7 @@
                 </v-card-title>
                 <span>{{ message }}</span>
                 <v-card-actions>
-                  <v-btn color="primary" flat @click.stop="dialog=false">Close</v-btn>
+                  <v-btn color="primary" flat @click.stop="dialog=false" @click="redirect">Close</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -48,16 +104,21 @@ import SongsService from '@/services/SongsService'
 export default {
   data () {
     return {
-      title: '',
-      aritist: '',
-      genre: '',
-      album: '',
-      albumImageUrl: '',
-      youtubeID: '',
-      lyrics: '',
-      tab: '',
+      song: {
+        title: '',
+        aritist: '',
+        genre: '',
+        album: '',
+        albumImageUrl: '',
+        youtubeID: '',
+        lyrics: '',
+        tab: ''
+      },
       dialog: false,
-      message: '添加成功'
+      message: '添加成功',
+      rules: {
+        required: (value) => !!value || 'Required.'
+      }
     }
   },
   components: {
@@ -66,6 +127,15 @@ export default {
   methods: {
     async post () {
       try {
+        const isAllFilled = Object
+          .keys(this.song)
+          .every(key => !!this.song[key])
+
+        if (!isAllFilled) {
+          this.message = '文本框未填写完整'
+          return
+        }
+
         const response = await SongsService.post({
           title: this.title,
           artist: this.artist,
@@ -76,11 +146,21 @@ export default {
           lyrics: this.lyrics,
           tab: this.tab
         })
-
-        console.log(response)
+        console.log(response.data)
       } catch (err) {
         console.log(err)
         this.messgae = err
+      }
+    },
+    redirect () {
+      const isAllFilled = Object
+        .keys(this.song)
+        .every(key => !!this.song[key])
+
+      if (isAllFilled) {
+        this.$router.push({
+          name: 'songs'
+        })
       }
     }
   }
