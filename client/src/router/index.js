@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Songs from '@/components/Songs'
 import CreateSong from '@/components/CreateSong'
 // import Heart from '@/components/Heart'
+import Markdown from '@/components/Markdown'
 
 Vue.use(Router)
 
@@ -31,6 +32,10 @@ export default new Router({
       path: '/songs/create',
       name: 'create-song',
       component: CreateSong
+    }, {
+      path: '/markdown',
+      name: 'markdown',
+      component: Markdown
     }
   ]
 })
