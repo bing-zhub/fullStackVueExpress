@@ -12,33 +12,39 @@
       dark
       fab
     >
-      <v-icon>account_circle</v-icon>
-      <v-icon>close</v-icon>
-    </v-btn>
-    <v-btn
-      fab
-      dark
-      small
-      color="green"
-      @click="$vuetify.goTo(0, options)"
-    >
-      <v-icon>edit</v-icon>
-    </v-btn>
-    <v-btn
-      fab
-      dark
-      small
-      color="indigo"
-    >
-      <v-icon>add</v-icon>
+      <v-icon large>face</v-icon>
+      <v-icon large>close</v-icon>
     </v-btn>
     <v-btn
       fab
       dark
       small
       color="red"
+      @click="$vuetify.goTo(0, options)"
     >
-      <v-icon>delete</v-icon>
+      <v-icon large>arrow_drop_up</v-icon>
+    </v-btn>
+    <v-btn
+      fab
+      dark
+      small
+      color="indigo"
+      mx-3
+    >
+      <div style="font-size:2em">
+        <i class="fab fa-qq"></i>
+      </div>
+    </v-btn>
+    <v-btn
+      fab
+      dark
+      small
+      color="green"
+      mx-4
+    >
+      <div style="font-size:2em">
+        <i class="fab fa-weixin"></i>
+      </div>
     </v-btn>
   </v-speed-dial>
 </template>
