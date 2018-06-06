@@ -34,6 +34,7 @@
                   {{song.youtubeID}} | {{song.lyrics}} |
                   {{song.tab}}</v-card-text>
                   <v-btn color="primary"/>
+                  <v-divider inset></v-divider>
               </v-card>
             </panel>
           </v-flex>
