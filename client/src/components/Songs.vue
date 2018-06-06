@@ -24,16 +24,17 @@
               </div>
               <v-card
                 dark
-                color="blue darken-1"
+                color="grey lighten-4"
+                class="black--text"
                 v-for="song in songs"
                 :key="song.id">
-                <v-card-text>{{song.title}} |
+                <v-card-text color="black">{{song.title}} |
                   {{song.artist}} | {{song.album}} |
                   {{song.genre}} | {{song.albumImageUrl}} |
                   {{song.youtubeID}} | {{song.lyrics}} |
                   {{song.tab}}</v-card-text>
+                  <v-btn color="primary"/>
               </v-card>
-              <v-spacer></v-spacer>
             </panel>
           </v-flex>
         </v-layout>

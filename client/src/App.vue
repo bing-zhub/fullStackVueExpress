@@ -7,17 +7,20 @@
           <router-view></router-view>
         </v-container>
       </main>
+      <page-footer/>
     </v-app>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/Header'
+import PageFooter from '@/components/Footer'
 
 export default {
   name: 'App',
   components: {
-    PageHeader
+    PageHeader,
+    PageFooter
   }
 }
 </script>
