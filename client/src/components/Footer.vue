@@ -17,7 +17,7 @@
           </v-btn>
         </v-card-text>
         <v-card-text class="white--text pt-0">
-          这个人很懒,什么都没有留下...                                                                           
+          这个人很懒,什么都没有留下...
         </v-card-text>
         <v-card-text class="white--text">
           &copy;2018 — Powered by <strong>Vuetify</strong>
@@ -29,7 +29,7 @@
 <script>
 export default {
   data: () => ({
-    icons: ['fab fa-weixin', 'fab fa-qq', 'fab fa-google-plus','fas fa-graduation-cap']
+    icons: ['fab fa-weixin', 'fab fa-qq', 'fab fa-google-plus', 'fas fa-graduation-cap']
   })
 }
 </script>

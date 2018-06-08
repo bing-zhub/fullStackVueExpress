@@ -9,12 +9,17 @@ import CreateSong from '@/components/CreateSong'
 import Markdown from '@/components/Markdown'
 import Page404 from '@/components/Page404'
 import QuillEditor from '@/components/QuillEditor'
+import ViewSong from '@/components/ViewSong'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
+      path: '*',
+      name: 'page404',
+      component: Page404
+    }, {
       path: '/',
       name: 'root',
       component: HelloWorld
@@ -39,13 +44,13 @@ export default new Router({
       name: 'markdown',
       component: Markdown
     }, {
-      path: '*',
-      name: 'page404',
-      component: Page404
-    }, {
       path: '/quill',
       name: 'quill',
       component: QuillEditor
+    }, {
+      path: '/song/:songId',
+      name: 'song',
+      component: ViewSong
     }
   ]
 })

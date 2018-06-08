@@ -4,7 +4,7 @@
         <span
           @click="navigateTo({name: 'root'})" class="home">
             <v-icon>home</v-icon>
-            死宅の快乐天堂
+            <span md>Homepage</span>
         </span>
     </v-toolbar-title>
     <v-toolbar-items>

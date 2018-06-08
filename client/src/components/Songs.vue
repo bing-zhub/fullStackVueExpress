@@ -32,9 +32,19 @@
                   {{song.artist}} | {{song.album}} |
                   {{song.genre}} | {{song.albumImageUrl}} |
                   {{song.youtubeID}} | {{song.lyrics}} |
-                  {{song.tab}}</v-card-text>
-                  <v-btn color="primary"/>
-                  <v-divider inset></v-divider>
+                  {{song.tab}}
+                </v-card-text>
+                <v-btn
+                color="primary"
+                @click="navigateTo({
+                    name: 'song',
+                    params: {
+                      songId: song.id
+                    }
+                  })">
+                  查看
+                </v-btn>
+                <v-divider inset></v-divider>
               </v-card>
             </panel>
           </v-flex>

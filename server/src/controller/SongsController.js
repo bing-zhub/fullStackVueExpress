@@ -23,5 +23,15 @@ module.exports = {
         error : 'something went wrong when you try to post a song'
       })
     }
+  },
+  async show (req, res) {
+    try {
+      const song = await Song.findById(req.params.songId)
+      res.send(song)
+    } catch (err) {
+      res.status(500).send({
+        error : 'something went wrong when you want to get a song by your songId'
+      })
+    }
   }
 }
