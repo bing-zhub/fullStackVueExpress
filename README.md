@@ -4,6 +4,8 @@
 
 ## 技术栈
 ### 前端 vue 使用vue-cli的webpack模板
+#### axios api请求工具
+基于promise的HTTP客户端
   #### vuex 状态管理
     用户的登录状态, 页面路由状态等
   #### vue-router 前端路由
@@ -56,9 +58,16 @@
             -- Songs.vue 主要内容加载页
             -- ViewSong.vue 详情页
         -- config
-        -- router
-        -- services
-        -- store
+        -- router 路由处理
+            -- index.js 前端路由
+        -- services 服务处理
+            -- Api.js 发送api请求
+            -- AuthenticationServices.js 处理登录/注册
+            -- SongServices.js 处理歌曲查看/添加/详情
+        -- store 状态仓库
+            -- 放置state mutation actions
+        -- App.vue 主入口
+        -- main.js 主入口
     --static 静态资源
     --test 测试文件
 --server
