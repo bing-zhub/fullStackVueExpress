@@ -71,10 +71,22 @@
     --static 静态资源
     --test 测试文件
 --server
-    --
-    --
-    --
-    --
+    -- node_modules 服务端第三方库
+    -- src 服务端源码
+        -- config
+            -- config.js 配置端口/数据库服务器/JWT 密码
+        -- controller api详细处理
+            -- AuthenticationController.js 处理来自前端的登录注册请求
+            -- SongsController.js 处理来自前端的检索添加请求
+        -- model 数据库Schema
+            -- index.js 数据库Schema索引
+            -- Song.js 歌曲Schema
+            -- User.js 用户Schema
+        -- policy 输入验证规则
+            -- AuthenticationControllerPolicy.js 验证注册时用户名与密码是否规范
+    -- app.js 后端主入口
+    -- routes.js 后端路由,对api进行路由
+            
 
 ## 示例 -- 用户注册
 
