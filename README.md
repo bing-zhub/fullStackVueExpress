@@ -91,7 +91,7 @@
 
 ## 示例 -- 用户注册
 
-### 前端
+### 前端 (client)
 入口文件 index.html, 在div标签中id为app的位置会由vue渲染页面
 vue主文件在src/app.vue
 ```html
@@ -291,7 +291,8 @@ export default new Router({
 注册ui组件主要有vuetify的v-form提供 三个v-form-field分别定义了三个字段邮箱/密码/确认密码  
 在v-card-actions 定义了两个监听 当事件触发 打开dialog被设置为true 显示出来 并且触发自定义的方法register :rules用来限制用户输入
 
-```js import AuthenticationService from '@/services/AuthenticationService'
+```js 
+import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/Panel'
 
 export default {
@@ -394,3 +395,43 @@ export default new vuex.Store({
   }
 })
 ```
+
+这里设置了三个state:token,user,isUserLoggedIn
+isUserLoggedIn通过判断token和user是否为空实现
+user与token的更改则由action和mutation实现
+
+回到register.vue 我们通过`import AuthenticationService from '@/services/AuthenticationService'`引用了AuthenticationService 在这个模块中 实现了与后端的交互 注册/登录
+
+```js
+import Api from '@/services/Api'
+
+export default {
+  register (credentials) {
+    return Api().post('register', credentials)
+  },
+  login (credentials) {
+    return Api().post('login', credentials)
+  }
+}
+```
+在这个模块中我们向后端'/register'发出post请求 参数为credentials即`{
+            email: this.email,
+            password: this.password
+          }`
+
+在这里我们还引用Api模块
+```js
+import axios from 'axios'
+
+export default() => {
+  return axios.create({
+    baseURL: `http://localhost:8081/`
+  })
+}
+```
+
+在这个模块中我们导入了axios用来实现http请求,并配置了后端的基地址.
+
+**至此,前端已经发出了API请求,等待后端处理**
+
+### 后端(server)
