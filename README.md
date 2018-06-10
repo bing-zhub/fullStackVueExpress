@@ -33,6 +33,7 @@
 ### 数据库 mysql
  
 ## 目录结构
+```
 --client
     --build build文件夹**vue-cli生成**
     --config webpack等配置文件**vue-cli生成**
@@ -86,7 +87,7 @@
             -- AuthenticationControllerPolicy.js 验证注册时用户名与密码是否规范
     -- app.js 后端主入口
     -- routes.js 后端路由,对api进行路由
-            
+```            
 
 ## 示例 -- 用户注册
 
@@ -129,7 +130,9 @@ export default {
     PageFooter,
     FloatingButton
   }
-}```
+}
+```
+
 进行组件注册,在header中放置一些导航信息
 
 下面就进入header.vue
@@ -274,12 +277,13 @@ export default new Router({
                   <v-btn color="primary" flat @click.stop="dialog=false">Close</v-btn>
                 </v-card-actions>
               </v-card>
-            </v-dialog>```
+            </v-dialog>
+```
+
 注册ui组件主要有vuetify的v-form提供 三个v-form-field分别定义了三个字段邮箱/密码/确认密码  
 在v-card-actions 定义了两个监听 当事件触发 打开dialog被设置为true 显示出来 并且触发自定义的方法register :rules用来限制用户输入
 
-```js 
-import AuthenticationService from '@/services/AuthenticationService'
+```js import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/Panel'
 
 export default {
@@ -326,6 +330,7 @@ export default {
   }
 }
 ```
+
 在register中引用AuthenticationService提供的register方法 并传入一个对象 这是一个异步操作用到了async/await 在调用成功后 将message设置为'登陆成功' 
 
 之后对store进行dispatch
@@ -379,5 +384,5 @@ export default new vuex.Store({
       commit('setUser', user)
     }
   }
-})```
-
+})
+```
