@@ -90,5 +90,294 @@
 
 ## 示例 -- 用户注册
 
-
+### 前端
+入口文件 index.html, 在div标签中id为app的位置会由vue渲染页面
+vue主文件在src/app.vue
+``` html
+<template>
+  <div id="app">
+    <v-app>
+    <!-- 注册页面入口在header中 -->
+      <page-header/>
+      <main>
+        <v-container fluid>
+          <router-view></router-view>
+          <v-flex offset-xs5>
+            <floating-button/>
+          </v-flex>
+        </v-container>
+      </main>
+      <page-footer/>
+    </v-app>
+  </div>
+</template>```
+
+page-header page-footer与floating-button会在全局出现(任何页面都包含着三个组件)
+router-view会根据当前url渲染不同的内容
+
+<page-header/>为自定义组件 为页面页面的header 通过
+```js
+import PageHeader from '@/components/Header' 
+//引入header @是webpack的alias 配置为src目录
+import PageFooter from '@/components/Footer'
+import FloatingButton from '@/components/FloatingButton'
+
+export default {
+  name: 'App',
+  components: {
+    PageHeader, //在组件中注册header, 不注册无法直接使用自定义组件
+    PageFooter,
+    FloatingButton
+  }
+}```
+进行组件注册,在header中放置一些导航信息
+
+下面就进入header.vue
+header.vue
+```html 
+<template>
+  <v-toolbar fixde dark class="cyan" color="primary">
+    <v-toolbar-title class="mr-4" light>
+    <!--工具栏-->
+        <span
+          @click="navigateTo({name: 'root'})" class="home">
+            <v-icon>home</v-icon>
+            <span md>Homepage</span>
+        </span>
+    </v-toolbar-title>
+    <v-toolbar-items>
+        <v-btn
+          flat
+          dark
+          @click="navigateTo({name: 'songs'})">
+            发现
+        </v-btn>
+    </v-toolbar-items>
+    <v-spacer></v-spacer>
+    <v-toolbar-items>
+        <v-btn
+          flat
+          dark
+          v-if='!$store.state.isUserLoggedIn'
+          @click="navigateTo({name: 'register'})">
+            注册&nbsp;&nbsp;<v-icon>fas fa-user-plus</v-icon>
+        </v-btn>
+        <!-- @click会注册一个监听器 但点击时调用navigateTo方法(自定义方法) -->
+        <!-- 传入router对象-->
+        <!-- v-if是一个条件渲染 当v-if后的值为false时 不渲染(隐藏) -->
+        <!-- 是为了在用户登陆后隐藏注册和登录按钮 v-if是由vuex管理的全局状态 -->
+        <v-btn
+          flat
+          dark
+          v-if='!$store.state.isUserLoggedIn'
+          @click="navigateTo({name: 'login'})">
+            登录&nbsp;&nbsp;<v-icon>fas fa-sign-in-alt</v-icon>
+        </v-btn>
+        <v-btn
+          flat
+          dark
+          v-if='$store.state.isUserLoggedIn'
+          @click="logout">
+            退出登录&nbsp;&nbsp;<v-icon>fas fa-sign-out-alt</v-icon>
+        </v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
+</template>```
+
+JavaScript
+```js
+export default {
+  methods: {
+  //自定义方法 在单击时 将route放入全局router 实现页面跳转
+    navigateTo (route) {
+      this.$router.push(route)
+    },
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push({
+        name: 'root'
+      })
+    }
+  }
+}
+```
+
+根据路由检索 route/index.js 中的定义
+
+```js
+import Register from '@/components/Register'
+export default new Router({
+  routes: [
+   {
+      path: '/register',
+      name: 'register',
+      component: Register
+    }
+  ]
+})
+```
+'/register' 被指向 'src/components/Register'
+
+``` html 
+<v-card-text>
+                <v-form autocomplete="off">
+                  <v-text-field
+                  prepend-icon="person"
+                  palceholder="email"
+                  name="login"
+                  label="Email"
+                  type="text"
+                  :rules="[rules.required]"
+                  v-model="email">
+                  </v-text-field>
+                  <v-text-field
+                  prepend-icon="lock"
+                  palceholder="password"
+                  name="password"
+                  label="Password"
+                  id="password1"
+                  type="password"
+                  :rules="[rules.required]"
+                  v-model="password1"
+                  autocomplete="new-password">
+                  </v-text-field>
+                  <v-text-field
+                  prepend-icon="lock"
+                  palceholder="password"
+                  name="password"
+                  label="Confirm Password"
+                  id="password2"
+                  type="password"
+                  :rules="[rules.required]"
+                  v-model="password2"
+                  autocomplete="new-password">
+                  </v-text-field>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" @click.stop="dialog = !dialog" @click="register">Sigup</v-btn>
+              </v-card-actions>```
+            dialog组件
+```html
+<v-dialog v-model="dialog" max-width="500px">
+              <v-card>
+                <v-card-title>
+                  <span>Information</span>
+                  <v-spacer></v-spacer>
+                  <v-menu bottom left>
+                  </v-menu>
+                </v-card-title>
+                <span>{{ message }}</span>
+                <v-card-actions>
+                  <v-btn color="primary" flat @click.stop="dialog=false">Close</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>```
+注册ui组件主要有vuetify的v-form提供 三个v-form-field分别定义了三个字段邮箱/密码/确认密码  
+在v-card-actions 定义了两个监听 当事件触发 打开dialog被设置为true 显示出来 并且触发自定义的方法register :rules用来限制用户输入
+
+```js 
+import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
+
+export default {
+  data () {
+    return {
+      email: '',
+      password1: '',
+      password2: '',
+      error: null,
+      drawer: null,
+      dialog: false,
+      message: '注册成功',
+      rules: {
+        required: (value) => !!value || '这是一个必填项'
+      }
+    }
+  },
+  methods: {
+    async register () {
+      try {
+        if (this.email === '' || this.password1 === '' || this.password2 === '') {
+          this.message = '信息未填写完整'
+        } else if (this.password1 !== this.password2) {
+          this.message = '两次密码输入不一致,请重试'
+        } else {
+          const response = await AuthenticationService.register({
+            email: this.email,
+            password: this.password
+          })
+          this.message = '登录成功'
+          this.$store.dispatch('setToken', response.data.token)
+          this.$store.dispatch('setUser', response.data.user)
+        }
+      } catch (err) {
+        this.message = err.response.data.error
+      }
+    }
+  },
+  components: {
+    Panel
+  },
+  props: {
+    source: String
+  }
+}
+```
+在register中引用AuthenticationService提供的register方法 并传入一个对象 这是一个异步操作用到了async/await 在调用成功后 将message设置为'登陆成功' 
+
+之后对store进行dispatch
+![vuex](https://vuex.vuejs.org/vuex.png)
+只有通过dispatch才能触发store中的action从而修改state
+
+我们在main.js中进行了如下的声明
+```js 
+import store from '@/store/store'
+new Vue({
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>'
+})```
+从而将store注册为一个全局组件
+
+store.js
+```js 
+import vue from 'vue'
+import vuex from 'vuex'
+
+vue.use(vuex)
+
+export default new vuex.Store({
+  strict: true,
+  state: {
+    token: null,
+    user: null,
+    isUserLoggedIn: false
+  },
+  mutations: {
+    setToken (state, token) {
+      state.token = token
+      if (token) {
+        state.isUserLoggedIn = true
+      } else {
+        state.isUserLoggedIn = false
+      }
+    },
+    setUser (state, user) {
+      state.user = user
+    }
+  },
+  actions: {
+    setToken ({ commit }, token) {
+      commit('setToken', token)
+    },
+    setUser ({ commit }, user) {
+      commit('setUser', user)
+    }
+  }
+})```
 

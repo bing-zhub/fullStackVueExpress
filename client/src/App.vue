@@ -5,6 +5,7 @@
       <main>
         <v-container fluid>
           <router-view></router-view>
+          <!-- h -->
           <v-flex offset-xs5>
             <floating-button/>
           </v-flex>
@@ -26,18 +27,7 @@ export default {
     PageHeader,
     PageFooter,
     FloatingButton
-  },
-  data () {
-    return {
-      offsetTop: 0
-    }
   }
-  // methods: {
-  //   onScroll (e) {
-  //     this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
-  //     console.log(this.offsetTop)
-  //   }
-  // }
 }
 </script>
 
@@ -48,6 +38,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* margin-top: 30px; */
 }
 </style>

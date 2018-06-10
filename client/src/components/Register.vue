@@ -7,9 +7,37 @@
             <panel title="Register">
               <v-card-text>
                 <v-form autocomplete="off">
-                  <v-text-field prepend-icon="person" palceholder="email" name="login" label="Email" type="text" v-model="email"></v-text-field>
-                  <v-text-field prepend-icon="lock" palceholder="password" name="password" label="Password" id="password1" type="password" v-model="password1" autocomplete="new-password"></v-text-field>
-                  <v-text-field prepend-icon="lock" palceholder="password" name="password" label="Confirm Password" id="password2" type="password" v-model="password2" autocomplete="new-password"></v-text-field>
+                  <v-text-field
+                  prepend-icon="person"
+                  palceholder="email"
+                  name="login"
+                  label="Email"
+                  type="text"
+                  :rules="[rules.required]"
+                  v-model="email">
+                  </v-text-field>
+                  <v-text-field
+                  prepend-icon="lock"
+                  palceholder="password"
+                  name="password"
+                  label="Password"
+                  id="password1"
+                  type="password"
+                  :rules="[rules.required]"
+                  v-model="password1"
+                  autocomplete="new-password">
+                  </v-text-field>
+                  <v-text-field
+                  prepend-icon="lock"
+                  palceholder="password"
+                  name="password"
+                  label="Confirm Password"
+                  id="password2"
+                  type="password"
+                  :rules="[rules.required]"
+                  v-model="password2"
+                  autocomplete="new-password">
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -53,13 +81,18 @@ export default {
       error: null,
       drawer: null,
       dialog: false,
-      message: '注册成功'
+      message: '注册成功',
+      rules: {
+        required: (value) => !!value || '这是一个必填项'
+      }
     }
   },
   methods: {
     async register () {
       try {
-        if (this.password1 !== this.password2) {
+        if (this.email === '' || this.password1 === '' || this.password2 === '') {
+          this.message = '信息未填写完整'
+        } else if (this.password1 !== this.password2) {
           this.message = '两次密码输入不一致,请重试'
         } else {
           const response = await AuthenticationService.register({
