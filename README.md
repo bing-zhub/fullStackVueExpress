@@ -94,7 +94,7 @@
 ### 前端
 入口文件 index.html, 在div标签中id为app的位置会由vue渲染页面
 vue主文件在src/app.vue
-``` html
+```html
 <template>
   <div id="app">
     <v-app>
@@ -111,12 +111,14 @@ vue主文件在src/app.vue
       <page-footer/>
     </v-app>
   </div>
-</template>```
+</template>
+```
 
 page-header page-footer与floating-button会在全局出现(任何页面都包含着三个组件)
 router-view会根据当前url渲染不同的内容
 
 <page-header/>为自定义组件 为页面页面的header 通过
+
 ```js
 import PageHeader from '@/components/Header' 
 //引入header @是webpack的alias 配置为src目录
@@ -133,11 +135,12 @@ export default {
 }
 ```
 
+
 进行组件注册,在header中放置一些导航信息
 
 下面就进入header.vue
-header.vue
-```html 
+
+```html
 <template>
   <v-toolbar fixde dark class="cyan" color="primary">
     <v-toolbar-title class="mr-4" light>
@@ -185,10 +188,11 @@ header.vue
         </v-btn>
     </v-toolbar-items>
   </v-toolbar>
-</template>```
+</template>
+```
+Script
 
-JavaScript
-```js
+``` js
 export default {
   methods: {
   //自定义方法 在单击时 将route放入全局router 实现页面跳转
@@ -208,7 +212,7 @@ export default {
 
 根据路由检索 route/index.js 中的定义
 
-```js
+``` js
 import Register from '@/components/Register'
 export default new Router({
   routes: [
@@ -220,9 +224,10 @@ export default new Router({
   ]
 })
 ```
+
 '/register' 被指向 'src/components/Register'
 
-``` html 
+``` html
 <v-card-text>
                 <v-form autocomplete="off">
                   <v-text-field
@@ -261,8 +266,11 @@ export default new Router({
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click.stop="dialog = !dialog" @click="register">Sigup</v-btn>
-              </v-card-actions>```
-            dialog组件
+              </v-card-actions>
+```
+  
+  dialog组件
+
 ```html
 <v-dialog v-model="dialog" max-width="500px">
               <v-card>
