@@ -435,3 +435,118 @@ export default() => {
 **至此,前端已经发出了API请求,等待后端处理**
 
 ### 后端(server)
+
+后端主入口为`src/app.js`
+
+``` js
+const express = require("express")
+const cors = require("cors")
+const bodyParser = require("body-parser")
+const morgan = require("morgan")
+const {sequelize} = require('./models')
+const config = require('./config/config')
+const routes = require('./routes')
+
+const app = express();
+app.use(morgan('combined'))
+app.use(bodyParser.json())
+app.use(cors())
+
+require('./routes')(app)
+
+sequelize.sync({force:false})
+    .then(() => {
+        app.listen(config.port)  
+        console.log(`Server started on port ${config.port}`)      
+    })
+```
+
+通过require将所有的外部引用文件导入到项目中,通过app.use将引入的文件注册到全局 使之可以在全局进行访问
+`require('./routes')(app)`完成路由的注册
+
+在`routes.js`中
+
+``` js
+const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
+const AuthenticationController = require('../src/controller/AuthenticationController') 
+
+module.exports = (app) => {
+    app.post('/register',
+    AuthenticationControllerPolicy.register,
+    AuthenticationController.register)
+} 
+```
+
+通过require导入AuthenticationControllerPolicy和AuthenticationController,其中前者主要用于检测用户的输入的合法性(通过joi及正则表达式进行验证),后者用于数据库操作.
+AuthenticationControllerPolicy作为一个中间件,先于AuthenticationController执行.
+在`AuthenticationControllerPolicy.js`中
+``` js
+const Joi = require('joi')
+
+module.exports = {
+    register(req, res, next){
+        const schema = {
+            email:Joi.string().email(),
+            password:Joi.string().regex(
+                new RegExp('^[a-zA-Z0-9]{8,32}$')
+            ),
+        }
+
+        const {error, value} = Joi.validate(req.body, schema)
+
+        if(error){
+            switch(error.details[0].type){
+                case 'string.email':
+                    res.status(400).send({
+                        error : 'you have to provide a validate email address'
+                    })
+                    break
+                case 'string.regex.base':
+                    res.status(400).send({
+                        error: `you have to provide a validate password:
+                        
+                        1. upper case 2. lower case 3.numerics 4. 8-32 in length`
+                    })
+                    break
+                default:
+                    res.status(400).send({
+                        error: 'invalidated registration information'
+                    })
+            }
+        }else{
+            next();
+        }
+    }
+}
+```
+使用joi验证用户的邮箱是否合法,密码是否由大小写数字8-32位组成.
+调用语句`Joi.validate`去用创建schema验证请求体
+如果不符合schema则报错,下面就通过一个条件分支进行判断,把具体的出错原因返回到前端,以支持用户修改. 如果没有出现错误,即符合schema则调用next(),执行`AuthenticationController.js`的内容
+
+在`AuthenticationController.js`中
+
+``` js
+const {User} = require('../models')
+
+module.exports = {
+  async register (req, res) {
+      try{
+          const user = await User.create(req.body)
+          res.send(user.toJSON())
+      }catch (err){
+          res.status(400).send({
+              error:"this email is already in use."
+          })
+      }
+  }
+}
+```
+
+User为数据库的Schema定义了表的字段以及数据类型,通过require导入进来
+这个模块导出的为一个异步方法 register() 
+首先通过`User.create(req.body)`创建一个User实例,数据位请求中的body
+创建成功后将示例user解析为json格式返回到前端
+
+至此后端的任务也已经完成.
+
+本项目采取前后端分离的方式进行开发, 可以最大化开发灵活度. 并且前端使用eslint规范,代码具有一定的规范性
