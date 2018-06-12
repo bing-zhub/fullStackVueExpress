@@ -1,6 +1,6 @@
 <template>
   <v-footer height="auto">
-    <v-flex xs12>
+    <v-flex xs12 >
       <v-card
         flat
         tile

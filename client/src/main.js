@@ -8,12 +8,10 @@ import store from '@/store/store'
 import fontawesome from '@fortawesome/fontawesome'
 import brands from '@fortawesome/fontawesome-free-brands'
 import { faSpinner } from '@fortawesome/fontawesome-free-solid'
-import '../node_modules/social-share.js/dist/css/share.min.css'
-import '../node_modules/social-share.js/dist/js/social-share.min.js'
-import 'github-markdown-css'
-import '@/assets/highlight/styles/atom-one-light.css'
-import '../node_modules/simplemde/dist/simplemde.min.css'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
+Vue.use(mavonEditor)
 fontawesome.library.add(brands, faSpinner)
 Vue.use(Vuetify)
 sync(store, router)

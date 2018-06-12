@@ -20,8 +20,6 @@
                   <v-icon>add</v-icon>
                 </v-btn>
               </slot> -->
-              <div class="social-share" data-sites='qq,wechat,qzone' data-url='http://www.baidu.com'>
-              </div>
               <v-card
                 dark
                 color="grey lighten-4"
