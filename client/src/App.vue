@@ -2,16 +2,18 @@
   <div id="app">
     <v-app>
       <page-header />
-      <main>
         <v-container fluid>
-          <router-view></router-view>
-          <!-- h -->
-          <v-flex offset-xs5>
-            <floating-button/>
-          </v-flex>
+          <main>
+            <router-view></router-view>
+            <!-- h -->
+            <v-flex offset-xs5>
+              <floating-button/>
+            </v-flex>
+          </main>
         </v-container>
-      </main>
-      <page-footer/>
+        <div>
+          <page-footer/>
+        </div>
     </v-app>
   </div>
 </template>
