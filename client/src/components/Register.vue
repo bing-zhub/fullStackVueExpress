@@ -97,7 +97,7 @@ export default {
         } else {
           const response = await AuthenticationService.register({
             email: this.email,
-            password: this.password
+            password: this.password1
           })
           this.message = '登录成功'
           this.$store.dispatch('setToken', response.data.token)
