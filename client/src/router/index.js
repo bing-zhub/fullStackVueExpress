@@ -10,6 +10,7 @@ import Markdown from '@/components/Markdown'
 import Page404 from '@/components/Page404'
 import QuillEditor from '@/components/QuillEditor'
 import ViewSong from '@/components/ViewSong'
+import CreateMarkdown from '@/components/CreateMarkdown'
 
 Vue.use(Router)
 
@@ -51,6 +52,9 @@ export default new Router({
       path: '/song/:songId',
       name: 'song',
       component: ViewSong
+    }, {
+      path: '/markdown/create',
+      component: CreateMarkdown
     }
   ]
 })

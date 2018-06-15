@@ -1,7 +1,7 @@
 <template>
   <div id="editor">
       <mavon-editor style="height: 100%" v-model="src"></mavon-editor>
-      <v-btn class="primary" @click="log">log</v-btn>
+      <v-btn class="primary ml-2" @click="log">log</v-btn>
   </div>
 </template>
 <script>

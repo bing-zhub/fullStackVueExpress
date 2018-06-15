@@ -1,38 +1,76 @@
 # fullStackVueExpress
+
 这是一个基于vue和express的全栈项目,目标是实现一个符合Material Design风格的CMS系统.
 其应用场景可以是博客/分享网站(技术,文学,养生等)/小型公司,工作室主页 etc..
 
 ## 技术栈
-### 前端 vue 使用vue-cli的webpack模板
-#### axios api请求工具
-基于promise的HTTP客户端
-  #### vuex 状态管理
-    用户的登录状态, 页面路由状态等
-  #### vue-router 前端路由
-    对前端url进行解析, 指向不同界面
-  #### vuetify 前端组件
-    一个符合MaterialDesign的前端组件库 对vue支持甚好
-  #### font awesome
-    前端图标库: 图标组件库
-  #### quillEditor 
-    富文本编辑器: 作用户编辑用(todo)
-  #### editor.md,simplemde-markdown-editor
-    Markdown编辑器: 一个高生产力markdown工具(todo)
-  #### video player (to do)
 
-### 后端 express 
+### 前端 vue 使用vue-cli的webpack模板
+
+#### axios api请求工具
+
+基于promise的HTTP客户端
+
+#### vuex状态管理
+
+```
+用户的登录状态, 页面路由状态等
+```
+
+#### vue-router 前端路由
+
+```
+对前端url进行解析, 指向不同界面
+```
+
+#### vuetify 前端组件
+
+```
+一个符合MaterialDesign的前端组件库 对vue支持甚好
+```
+
+#### font awesome
+
+```
+前端图标库: 图标组件库
+```
+
+#### quillEditor
+
+```
+富文本编辑器: 作用户编辑用(todo)
+```
+
+#### editor.md,simplemde-markdown-editor
+
+```
+Markdown编辑器: 一个高生产力markdown工具(todo)
+```
+
+#### video player (to do)
+
+### 后端 express
+
 #### bcrypt-nodejs sha256加密工具
+
 #### bluebird promisify工具
+
 #### body-parser api请求解析工具
+
 #### cors 跨域请求工具
+
 #### joi 数据模型验证
-#### jsonwebtoken 用户身份信息认证 
+
+#### jsonwebtoken 用户身份信息认证
+
 #### morgan 日志中间件
+
 #### sequelize 基于promise的ORM工具,用于数据库交互
 
 ### 数据库 mysql
- 
+
 ## 目录结构
+
 ```
 --client
     --build build文件夹**vue-cli生成**
@@ -87,13 +125,15 @@
             -- AuthenticationControllerPolicy.js 验证注册时用户名与密码是否规范
     -- app.js 后端主入口
     -- routes.js 后端路由,对api进行路由
-```            
+```
 
 ## 示例 -- 用户注册
 
 ### 前端 (client)
+
 入口文件 index.html, 在div标签中id为app的位置会由vue渲染页面
 vue主文件在src/app.vue
+
 ```html
 <template>
   <div id="app">
@@ -134,7 +174,6 @@ export default {
   }
 }
 ```
-
 
 进行组件注册,在header中放置一些导航信息
 
@@ -190,9 +229,10 @@ export default {
   </v-toolbar>
 </template>
 ```
+
 Script
 
-``` js
+```js
 export default {
   methods: {
   //自定义方法 在单击时 将route放入全局router 实现页面跳转
@@ -212,7 +252,7 @@ export default {
 
 根据路由检索 route/index.js 中的定义
 
-``` js
+```js
 import Register from '@/components/Register'
 export default new Router({
   routes: [
@@ -227,7 +267,7 @@ export default new Router({
 
 '/register' 被指向 'src/components/Register'
 
-``` html
+```html
 <v-card-text>
                 <v-form autocomplete="off">
                   <v-text-field
@@ -268,7 +308,7 @@ export default new Router({
                 <v-btn color="primary" @click.stop="dialog = !dialog" @click="register">Sigup</v-btn>
               </v-card-actions>
 ```
-  
+
   dialog组件
 
 ```html
@@ -291,7 +331,7 @@ export default new Router({
 注册ui组件主要有vuetify的v-form提供 三个v-form-field分别定义了三个字段邮箱/密码/确认密码  
 在v-card-actions 定义了两个监听 当事件触发 打开dialog被设置为true 显示出来 并且触发自定义的方法register :rules用来限制用户输入
 
-```js 
+```js
 import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/Panel'
 
@@ -347,7 +387,8 @@ export default {
 只有通过dispatch才能触发store中的action从而修改state
 
 我们在main.js中进行了如下的声明
-```js 
+
+```js
 import store from '@/store/store'
 new Vue({
   el: '#app',
@@ -355,11 +396,14 @@ new Vue({
   store,
   components: { App },
   template: '<App/>'
-})```
+})
+```
+
 从而将store注册为一个全局组件
 
 store.js
-```js 
+
+```js
 import vue from 'vue'
 import vuex from 'vuex'
 
@@ -414,12 +458,14 @@ export default {
   }
 }
 ```
+
 在这个模块中我们向后端'/register'发出post请求 参数为credentials即`{
             email: this.email,
             password: this.password
           }`
 
 在这里我们还引用Api模块
+
 ```js
 import axios from 'axios'
 
@@ -438,7 +484,7 @@ export default() => {
 
 后端主入口为`src/app.js`
 
-``` js
+```js
 const express = require("express")
 const cors = require("cors")
 const bodyParser = require("body-parser")
@@ -466,7 +512,7 @@ sequelize.sync({force:false})
 
 在`routes.js`中
 
-``` js
+```js
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const AuthenticationController = require('../src/controller/AuthenticationController') 
 
@@ -474,13 +520,14 @@ module.exports = (app) => {
     app.post('/register',
     AuthenticationControllerPolicy.register,
     AuthenticationController.register)
-} 
+}
 ```
 
 通过require导入AuthenticationControllerPolicy和AuthenticationController,其中前者主要用于检测用户的输入的合法性(通过joi及正则表达式进行验证),后者用于数据库操作.
 AuthenticationControllerPolicy作为一个中间件,先于AuthenticationController执行.
 在`AuthenticationControllerPolicy.js`中
-``` js
+
+```js
 const Joi = require('joi')
 
 module.exports = {
@@ -504,7 +551,7 @@ module.exports = {
                 case 'string.regex.base':
                     res.status(400).send({
                         error: `you have to provide a validate password:
-                        
+
                         1. upper case 2. lower case 3.numerics 4. 8-32 in length`
                     })
                     break
@@ -519,13 +566,14 @@ module.exports = {
     }
 }
 ```
+
 使用joi验证用户的邮箱是否合法,密码是否由大小写数字8-32位组成.
 调用语句`Joi.validate`去用创建schema验证请求体
 如果不符合schema则报错,下面就通过一个条件分支进行判断,把具体的出错原因返回到前端,以支持用户修改. 如果没有出现错误,即符合schema则调用next(),执行`AuthenticationController.js`的内容
 
 在`AuthenticationController.js`中
 
-``` js
+```js
 const {User} = require('../models')
 
 module.exports = {

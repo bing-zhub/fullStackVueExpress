@@ -1,6 +1,7 @@
 const AuthenticationController = require('../src/controller/AuthenticationController') 
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const SongsController = require('../src/controller/SongsController')
+const MarkdownController = require('../src/controller/MarkdownController')
 
 module.exports = (app) => {
     app.post('/register',
@@ -18,4 +19,13 @@ module.exports = (app) => {
 
     app.get('/songs/:songId',
     SongsController.show)
+
+    app.get('/markdown',
+    MarkdownController.index)
+    
+    app.post('/markdown',
+    MarkdownController.post)
+
+    app.get('/markdown/:markdownId',
+    MarkdownController.show)
 } 
