@@ -31,14 +31,9 @@
                     v-model="markdown.description">
                   </v-text-field>
 
-                  <v-text-field
-                    label="Content"
-                    type="text"
-                    required
-                    :rules="[rules.required]"
-                    v-model="markdown.content"
-                    multi-line>
-                  </v-text-field>
+                  <div id="editor">
+                      <mavon-editor style="height: 100%" v-model="markdown.content"></mavon-editor>
+                  </div>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -127,5 +122,9 @@ export default {
 }
 </script>
 <style>
-
+#editor {
+  margin: auto;
+  width: 95%;
+  height: 580px;
+}
 </style>
