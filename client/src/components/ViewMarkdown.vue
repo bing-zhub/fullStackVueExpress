@@ -3,7 +3,7 @@
     <v-container fluid fill-height>
       <v-layout justify-center>
         <v-flex xs12 sm80 md4>
-          <div style="font-size: 300%">{{markdown.title}}</div>
+          <div style="">{{markdown.title}}</div>
           <td/>
           {{markdown.author}}
           <vue-markdown :source="markdown.content">
@@ -26,7 +26,8 @@ export default {
     VueMarkdown
   },
   async mounted () {
-    this.markdown = (await MarkdownService.show(4)).data
+    const markdownId = this.$store.state.route.params.markdownId
+    this.markdown = (await MarkdownService.show(markdownId)).data
   }
 }
 </script>

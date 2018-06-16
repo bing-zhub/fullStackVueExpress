@@ -18,7 +18,6 @@ module.exports = {
       const song = await Song.create(req.body)
       res.send(song)
     } catch (err) {
-      console.log("we are here",err);
       res.status(500).send({
         error : 'something went wrong when you try to post a song'
       })

@@ -3,11 +3,12 @@ const {Markdown} = require('../models')
 module.exports = {
   async index (req, res) {
     try {
-      const Markdown = await Markdown.findAll({
+      const Markdowns = await Markdown.findAll({
         limit: 10
       })
-      res.send(Markdown)
+      res.send(Markdowns)
     } catch (err) {
+      console.log(err)
       res.status(500).send({
         error : 'something went wrong when you try to fetch all the Markdown'
       })

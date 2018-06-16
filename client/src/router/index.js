@@ -5,12 +5,12 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Songs from '@/components/Songs'
 import CreateSong from '@/components/CreateSong'
-// import Heart from '@/components/Heart'
-import Markdown from '@/components/Markdown'
 import Page404 from '@/components/Page404'
 import QuillEditor from '@/components/QuillEditor'
 import ViewSong from '@/components/ViewSong'
 import CreateMarkdown from '@/components/CreateMarkdown'
+import Markdowns from '@/components/Markdowns'
+import ViewMarkdown from '@/components/ViewMarkdown'
 
 Vue.use(Router)
 
@@ -41,10 +41,6 @@ export default new Router({
       name: 'create-song',
       component: CreateSong
     }, {
-      path: '/markdown',
-      name: 'markdown',
-      component: Markdown
-    }, {
       path: '/quill',
       name: 'quill',
       component: QuillEditor
@@ -53,8 +49,17 @@ export default new Router({
       name: 'song',
       component: ViewSong
     }, {
-      path: '/markdown/create',
+      path: '/markdowns/create',
+      name: 'create-markdown',
       component: CreateMarkdown
+    }, {
+      path: '/markdowns',
+      name: 'markdowns',
+      component: Markdowns
+    }, {
+      path: '/markdown/:markdownId',
+      name: 'markdown',
+      component: ViewMarkdown
     }
   ]
 })

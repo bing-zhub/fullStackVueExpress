@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     author: DataTypes.STRING,
     description: DataTypes.STRING,
-    content: DataTypes.TEXT
+    content: DataTypes.TEXT('large')
   })
   return Song
 }
