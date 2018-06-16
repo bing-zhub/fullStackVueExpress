@@ -3,6 +3,54 @@
 这是一个基于vue和express的全栈项目,目标是实现一个符合Material Design风格的CMS系统.
 其应用场景可以是博客/分享网站(技术,文学,养生等)/小型公司,工作室主页 etc..
 
+前端基于vue-cli提供的webpack模板进行开发, 使用vuetify作为前端组件库, 配合一些列的第三方组件化工具,完成前端的开发.
+
+后端使用express.采用Sequelize对数据库进行增删改查操作.
+
+前后端使用axios完成RESTfull交互
+
+## Getting start
+
+1.`git clone https://github.com/bing-zhub/fullStackVueExpress.git`
+
+2.`cd fullStackVueExpress`
+
+
+### client
+
+3.`cd client`
+
+4.`cnpm install`
+5.`npm run start`
+
+### server
+
+3.`cd server`
+
+4.`cnpm install`
+
+5.`npm run start`
+
+*注意* 你需要在config目录下配置config.js以实现数据库连接等, 如果不进行配置 将无法运行
+```js
+module.exports = {
+    port:process.env.PORT || 8081,
+    db:{
+        database: process.env.DB_NAME || 'your dbname',
+        user: process.env.DB_USER || 'your db user',
+        password: process.env.DB_PWD || 'your db password',
+        options:{
+            dialect: process.env.DIALECT || 'your db version',
+            host: process.env.HOST || 'your db host',
+            storage: './example.mysql'
+        }
+    },
+    authentication:{
+        jwtSecret: process.env.JWT_SECRET || 'bing'
+    }
+}
+```
+
 ## 技术栈
 
 ### 前端 vue 使用vue-cli的webpack模板
@@ -11,7 +59,7 @@
 
 基于promise的HTTP客户端
 
-#### vuex状态管理
+#### vuex状态管理
 
 ```
 用户的登录状态, 页面路由状态等
@@ -47,7 +95,7 @@
 Markdown编辑器: 一个高生产力markdown工具(todo)
 ```
 
-#### video player (to do)
+#### video player (to do)
 
 ### 后端 express
 
@@ -329,7 +377,7 @@ export default new Router({
 ```
 
 注册ui组件主要有vuetify的v-form提供 三个v-form-field分别定义了三个字段邮箱/密码/确认密码  
-在v-card-actions 定义了两个监听 当事件触发 打开dialog被设置为true 显示出来 并且触发自定义的方法register :rules用来限制用户输入
+在v-card-actions 定义了两个监听 当事件触发 打开dialog被设置为true 显示出来 并且触发自定义的方法register :rules用来限制用户输入
 
 ```js
 import AuthenticationService from '@/services/AuthenticationService'
@@ -441,10 +489,10 @@ export default new vuex.Store({
 ```
 
 这里设置了三个state:token,user,isUserLoggedIn
-isUserLoggedIn通过判断token和user是否为空实现
-user与token的更改则由action和mutation实现
+isUserLoggedIn通过判断token和user是否为空实现
+user与token的更改则由action和mutation实现
 
-回到register.vue 我们通过`import AuthenticationService from '@/services/AuthenticationService'`引用了AuthenticationService 在这个模块中 实现了与后端的交互 注册/登录
+回到register.vue 我们通过`import AuthenticationService from '@/services/AuthenticationService'`引用了AuthenticationService 在这个模块中 实现了与后端的交互 注册/登录
 
 ```js
 import Api from '@/services/Api'
@@ -459,7 +507,7 @@ export default {
 }
 ```
 
-在这个模块中我们向后端'/register'发出post请求 参数为credentials即`{
+在这个模块中我们向后端'/register'发出post请求 参数为credentials即`{
             email: this.email,
             password: this.password
           }`
@@ -476,7 +524,7 @@ export default() => {
 }
 ```
 
-在这个模块中我们导入了axios用来实现http请求,并配置了后端的基地址.
+在这个模块中我们导入了axios用来实现http请求,并配置了后端的基地址.
 
 **至此,前端已经发出了API请求,等待后端处理**
 
@@ -523,7 +571,7 @@ module.exports = (app) => {
 }
 ```
 
-通过require导入AuthenticationControllerPolicy和AuthenticationController,其中前者主要用于检测用户的输入的合法性(通过joi及正则表达式进行验证),后者用于数据库操作.
+通过require导入AuthenticationControllerPolicy和AuthenticationController,其中前者主要用于检测用户的输入的合法性(通过joi及正则表达式进行验证),后者用于数据库操作.
 AuthenticationControllerPolicy作为一个中间件,先于AuthenticationController执行.
 在`AuthenticationControllerPolicy.js`中
 
@@ -567,11 +615,11 @@ module.exports = {
 }
 ```
 
-使用joi验证用户的邮箱是否合法,密码是否由大小写数字8-32位组成.
-调用语句`Joi.validate`去用创建schema验证请求体
-如果不符合schema则报错,下面就通过一个条件分支进行判断,把具体的出错原因返回到前端,以支持用户修改. 如果没有出现错误,即符合schema则调用next(),执行`AuthenticationController.js`的内容
+使用joi验证用户的邮箱是否合法,密码是否由大小写数字8-32位组成.
+调用语句`Joi.validate`去用创建schema验证请求体
+如果不符合schema则报错,下面就通过一个条件分支进行判断,把具体的出错原因返回到前端,以支持用户修改. 如果没有出现错误,即符合schema则调用next(),执行`AuthenticationController.js`的内容
 
-在`AuthenticationController.js`中
+`AuthenticationController.js`中
 
 ```js
 const {User} = require('../models')
@@ -590,11 +638,13 @@ module.exports = {
 }
 ```
 
-User为数据库的Schema定义了表的字段以及数据类型,通过require导入进来
+User为数据库的Schema定义了表的字段以及数据类型,通过require导入进来
 这个模块导出的为一个异步方法 register() 
 首先通过`User.create(req.body)`创建一个User实例,数据位请求中的body
-创建成功后将示例user解析为json格式返回到前端
+创建成功后将示例user析为json格式返回到前端
 
 至此后端的任务也已经完成.
 
-本项目采取前后端分离的方式进行开发, 可以最大化开发灵活度. 并且前端使用eslint规范,代码具有一定的规范性
+本项目采取前后端分离的方式进行开发, 以最大化开发灵活度. 并且使用eslint规范,代码具有一定的规范性
+
+
