@@ -38,8 +38,9 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary"  @click="post">添加</v-btn>
-                <!-- @click.stop="dialog = !dialog" -->
+                <v-btn color="primary"
+                @click.stop="dialog = !dialog"
+                @click="post">添加</v-btn>
               </v-card-actions>
             </panel>
             <v-dialog v-model="dialog" max-width="500px">
