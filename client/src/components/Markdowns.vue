@@ -24,18 +24,18 @@
                 dark
                 color="grey lighten-4"
                 class="black--text"
-                v-for="Markdown in Markdowns"
-                :key="Markdown.id">
-                <v-card-text color="black">{{Markdown.title}} |
-                  {{Markdown.author}} |
-                  {{Markdown.description}}
+                v-for="markdown in markdowns"
+                :key="markdown.id">
+                <v-card-text color="black">{{markdown.title}} |
+                  {{markdown.author}} |
+                  {{markdown.description}}
                 </v-card-text>
                 <v-btn
                 color="primary"
                 @click="navigateTo({
-                    name: 'Markdown',
+                    name: 'markdown',
                     params: {
-                      MarkdownId: Markdown.id
+                      markdownId: markdown.id
                     }
                   })">
                   查看
@@ -58,12 +58,11 @@ export default {
   },
   data () {
     return {
-      Markdowns: null
+      markdowns: null
     }
   },
   async mounted () {
-    this.Markdowns = (await MarkdownService.index()).data
-    console.log(this.Markdowns)
+    this.markdowns = (await MarkdownService.index()).data
   },
   methods: {
     navigateTo (route) {

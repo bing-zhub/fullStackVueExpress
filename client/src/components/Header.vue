@@ -11,7 +11,7 @@
         <v-btn
           flat
           dark
-          @click="navigateTo({name: 'songs'})">
+          @click="navigateTo({name: 'markdowns'})">
             发现
         </v-btn>
     </v-toolbar-items>
