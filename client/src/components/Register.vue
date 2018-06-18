@@ -4,58 +4,70 @@
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
-            <panel title="Register">
+            <panel title="注册">
               <v-card-text>
                 <v-form autocomplete="off">
                   <v-text-field
-                  prepend-icon="person"
-                  palceholder="email"
-                  name="login"
-                  label="Email"
-                  type="text"
-                  :rules="[rules.required]"
-                  v-model="email">
+                    prepend-icon="person"
+                    palceholder="email"
+                    name="login"
+                    label="电子邮箱"
+                    type="text"
+                    :rules="[rules.required]"
+                    v-model="email">
                   </v-text-field>
                   <v-text-field
-                  prepend-icon="lock"
-                  palceholder="password"
-                  name="password"
-                  label="Password"
-                  id="password1"
-                  type="password"
-                  :rules="[rules.required]"
-                  v-model="password1"
-                  autocomplete="new-password">
+                    prepend-icon="lock"
+                    palceholder="password"
+                    name="password"
+                    label="密码"
+                    id="password1"
+                    type="password"
+                    :rules="[rules.required]"
+                    v-model="password1"
+                    autocomplete="new-password">
                   </v-text-field>
                   <v-text-field
-                  prepend-icon="lock"
-                  palceholder="password"
-                  name="password"
-                  label="Confirm Password"
-                  id="password2"
-                  type="password"
-                  :rules="[rules.required]"
-                  v-model="password2"
-                  autocomplete="new-password">
+                    prepend-icon="lock"
+                    palceholder="password"
+                    name="password"
+                    label="确认密码"
+                    id="password2"
+                    type="password"
+                    :rules="[rules.required]"
+                    v-model="password2"
+                    autocomplete="new-password">
                   </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click.stop="dialog = !dialog" @click="register">Sigup</v-btn>
+                <v-btn
+                  color="primary"
+                  @click.stop="dialog = !dialog"
+                  @click="register">
+                  注册
+                </v-btn>
               </v-card-actions>
             </panel>
-            <v-dialog v-model="dialog" max-width="500px">
+            <v-dialog
+              v-model="dialog"
+              max-width="500px">
               <v-card>
                 <v-card-title>
-                  <span>Information</span>
+                  <span>提醒</span>
                   <v-spacer></v-spacer>
                   <v-menu bottom left>
                   </v-menu>
                 </v-card-title>
                 <span>{{ message }}</span>
                 <v-card-actions>
-                  <v-btn color="primary" flat @click.stop="dialog=false">Close</v-btn>
+                  <v-btn
+                    color="primary"
+                    flat
+                    @click.stop="dialog=false">
+                    关闭
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>

@@ -4,22 +4,41 @@
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm80 md4>
-            <panel title='Login'>
+            <panel title='登录'>
               <v-card-text>
                 <v-form autocomplete="off">
-                  <v-text-field prepend-icon="person" palceholder="email" name="login" label="Login" type="text" v-model="email" autocomplete="new-password"></v-text-field>
-                  <v-text-field prepend-icon="lock" palceholder="password" name="password" label="Password" id="password" type="password" v-model="password" autocomplete="new-password"></v-text-field>
+                  <v-text-field
+                  prepend-icon="person"
+                  palceholder="example@example.com"
+                  name="login"
+                  label="电子邮箱"
+                  type="text"
+                  v-model="email"
+                  autocomplete="new-password"
+                  :rules="[rules.required]">
+                  </v-text-field>
+                  <v-text-field
+                  prepend-icon="lock"
+                  palceholder="password"
+                  name="password"
+                  label="密码"
+                  id="password"
+                  type="password"
+                  v-model="password"
+                  autocomplete="new-password"
+                  :rules="[rules.required]">
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click.stop="dialog = !dialog " @click="login">Login</v-btn>
+                <v-btn color="primary" @click.stop="dialog = !dialog " @click="login">登录</v-btn>
               </v-card-actions>
             </panel>
             <v-dialog v-model="dialog" max-width="500px">
               <v-card>
                 <v-card-title>
-                  <span>Information</span>
+                  <span>提醒</span>
                   <v-spacer></v-spacer>
                   <v-menu bottom left>
                   </v-menu>
@@ -49,7 +68,10 @@ export default {
       email: '',
       password: '',
       dialog: false,
-      message: '登录成功'
+      message: '登录成功',
+      rules: {
+        required: (value) => !!value || '这是一个必填项'
+      }
     }
   },
   methods: {
