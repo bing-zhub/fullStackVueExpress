@@ -8,31 +8,36 @@
               <v-card-text>
                 <v-form autocomplete="off">
                   <v-text-field
-                  prepend-icon="person"
-                  palceholder="example@example.com"
-                  name="login"
-                  label="电子邮箱"
-                  type="text"
-                  v-model="email"
-                  autocomplete="new-password"
-                  :rules="[rules.required]">
+                    prepend-icon="person"
+                    palceholder="example@example.com"
+                    name="login"
+                    label="电子邮箱"
+                    type="text"
+                    v-model="email"
+                    autocomplete="new-password"
+                    :rules="[rules.required]">
                   </v-text-field>
                   <v-text-field
-                  prepend-icon="lock"
-                  palceholder="password"
-                  name="password"
-                  label="密码"
-                  id="password"
-                  type="password"
-                  v-model="password"
-                  autocomplete="new-password"
-                  :rules="[rules.required]">
+                    prepend-icon="lock"
+                    palceholder="password"
+                    name="password"
+                    label="密码"
+                    id="password"
+                    type="password"
+                    v-model="password"
+                    autocomplete="new-password"
+                    :rules="[rules.required]">
                   </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click.stop="dialog = !dialog " @click="login">登录</v-btn>
+                <v-btn
+                  color="primary"
+                  @click.stop="dialog = !dialog "
+                  @click="login">
+                登录
+                </v-btn>
               </v-card-actions>
             </panel>
             <v-dialog v-model="dialog" max-width="500px">
@@ -45,7 +50,11 @@
                 </v-card-title>
                 <span>{{ message }}</span>
                 <v-card-actions>
-                  <v-btn color="primary" flat @click.stop="dialog=false">Close</v-btn>
+                  <v-btn
+                    color="primary"
+                    flat @click.stop="dialog=false">
+                    Close
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
