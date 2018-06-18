@@ -12,7 +12,15 @@
           flat
           dark
           @click="navigateTo({name: 'markdowns'})">
-            发现
+            文章
+        </v-btn>
+    </v-toolbar-items>
+    <v-toolbar-items>
+        <v-btn
+          flat
+          dark
+          @click="navigateTo({name: 'songs'})">
+            歌曲
         </v-btn>
     </v-toolbar-items>
     <v-spacer></v-spacer>
