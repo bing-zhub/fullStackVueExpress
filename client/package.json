@@ -30,6 +30,7 @@
     "simplemde": "^1.11.2",
     "vue": "^2.5.2",
     "vue-markdown": "^2.2.4",
+    "vue-pdf": "^3.3.1",
     "vue-router": "^3.0.1",
     "vue-scroll": "^2.1.7",
     "vue-social-share": "^0.0.3",

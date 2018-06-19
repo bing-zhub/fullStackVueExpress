@@ -11,6 +11,7 @@ import ViewSong from '@/components/ViewSong'
 import CreateMarkdown from '@/components/CreateMarkdown'
 import Markdowns from '@/components/Markdowns'
 import ViewMarkdown from '@/components/ViewMarkdown'
+import Pdf from '@/components/Pdf'
 
 Vue.use(Router)
 
@@ -60,6 +61,10 @@ export default new Router({
       path: '/markdown/:markdownId',
       name: 'markdown',
       component: ViewMarkdown
+    }, {
+      path: '/pdf',
+      name: 'pdf',
+      component: Pdf
     }
   ]
 })
