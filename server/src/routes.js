@@ -2,6 +2,7 @@ const AuthenticationController = require('../src/controller/AuthenticationContro
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const SongsController = require('../src/controller/SongsController')
 const MarkdownController = require('../src/controller/MarkdownController')
+const FileController = require('../src/controller/FileController')
 
 module.exports = (app) => {
     app.post('/register',
@@ -28,4 +29,7 @@ module.exports = (app) => {
 
     app.get('/markdown/:markdownId',
     MarkdownController.show)
+
+    // app.post('/upload',
+    // FileController.upload)
 } 

@@ -24,6 +24,17 @@
         </v-btn>
     </v-toolbar-items>
     <v-spacer></v-spacer>
+    <aplayer 
+      autoplay
+      :music="{
+        title: 'secret base~君がくれたもの~',
+        artist: 'Silent Siren',
+        src: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.mp3',
+        pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
+      }"
+      float
+    />
+    <v-spacer></v-spacer>
     <v-toolbar-items>
         <v-btn
           flat
@@ -51,7 +62,11 @@
 </template>
 
 <script>
+import Aplayer from 'vue-aplayer'
 export default {
+  components: {
+    Aplayer
+  },
   methods: {
     navigateTo (route) {
       this.$router.push(route)
