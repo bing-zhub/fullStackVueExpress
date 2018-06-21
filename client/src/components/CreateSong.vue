@@ -20,7 +20,7 @@
                     type="text"
                     required
                     :rules="[rules.required]"
-                    v-model="song.aritist">
+                    v-model="song.artist">
                   </v-text-field>
 
                   <v-text-field
@@ -121,7 +121,7 @@ export default {
         const isAllFilled = Object
           .keys(this.song)
           .every(key => !!this.song[key])
-
+        console.log(this.song)
         if (!isAllFilled) {
           this.message = '文本框未填写完整'
           return

@@ -30,6 +30,7 @@ module.exports = {
       const markdown = await Markdown.findById(req.params.markdownId)
       res.send(markdown)
     } catch (err) {
+      console.log(err)
       res.status(500).send({
         error : 'something went wrong when you want to get a markdown by your markdownId'
       })

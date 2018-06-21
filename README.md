@@ -15,7 +15,6 @@
 
 2.`cd fullStackVueExpress`
 
-
 ### client
 
 3.`cd client`
@@ -32,6 +31,7 @@
 5.`npm run start`
 
 *注意* 你需要在config目录下配置config.js以实现数据库连接等, 如果不进行配置 将无法运行
+
 ```js
 module.exports = {
     port:process.env.PORT || 8081,
@@ -646,5 +646,3 @@ User为数据库的Schema定义了表的字段以及数据类型,通过require�
 至此后端的任务也已经完成.
 
 本项目采取前后端分离的方式进行开发, 以最大化开发灵活度. 并且使用eslint规范,代码具有一定的规范性
-
-
