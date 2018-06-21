@@ -65,6 +65,7 @@
                   <v-btn
                     color="primary"
                     flat
+                    @click="redirect"
                     @click.stop="dialog=false">
                     关闭
                   </v-btn>
@@ -111,12 +112,19 @@ export default {
             email: this.email,
             password: this.password1
           })
-          this.message = '登录成功'
+          this.message = '注册成功'
           this.$store.dispatch('setToken', response.data.token)
           this.$store.dispatch('setUser', response.data.user)
         }
       } catch (err) {
         this.message = err.response.data.error
+      }
+    },
+    redirect () {
+      if (this.message === '注册成功') {
+        this.$router.push({
+          name: 'login'
+        })
       }
     }
   },

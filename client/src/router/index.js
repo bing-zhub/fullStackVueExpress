@@ -12,7 +12,6 @@ import CreateMarkdown from '@/components/CreateMarkdown'
 import Markdowns from '@/components/Markdowns'
 import ViewMarkdown from '@/components/ViewMarkdown'
 import Pdf from '@/components/Pdf'
-import ImageUploader from '@/components/ImageUploader'
 import VideoPlay from '@/components/VideoPlay'
 import MusicPlayer from '@/components/MusicPlayer'
 
@@ -68,10 +67,6 @@ export default new Router({
       path: '/pdf',
       name: 'pdf',
       component: Pdf
-    }, {
-      path: '/image/upload',
-      name: 'ImageUpload',
-      component: ImageUploader
     }, {
       path: '/video/play',
       name: 'video-play',

@@ -52,8 +52,9 @@
                 <v-card-actions>
                   <v-btn
                     color="primary"
+                    @click="redirect"
                     flat @click.stop="dialog=false">
-                    Close
+                    关闭
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -94,6 +95,13 @@ export default {
         this.$store.dispatch('setUser', response.data.user)
       } catch (err) {
         this.message = err.response.data.error
+      }
+    },
+    redirect () {
+      if (this.message === '登录成功') {
+        this.$router.push({
+          name: 'root'
+        })
       }
     }
   },

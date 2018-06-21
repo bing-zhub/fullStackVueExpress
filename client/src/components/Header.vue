@@ -23,8 +23,24 @@
             歌曲
         </v-btn>
     </v-toolbar-items>
+    <v-toolbar-items>
+        <v-btn
+          flat
+          dark
+          @click="navigateTo({name: 'pdf'})">
+            文档
+        </v-btn>
+    </v-toolbar-items>
+    <v-toolbar-items>
+        <v-btn
+          flat
+          dark
+          @click="navigateTo({name: 'video-play'})">
+            视频
+        </v-btn>
+    </v-toolbar-items>
     <v-spacer></v-spacer>
-    <aplayer 
+    <aplayer
       autoplay
       :music="{
         title: 'secret base~君がくれたもの~',
@@ -43,6 +59,14 @@
           @click="navigateTo({name: 'register'})">
             注册&nbsp;&nbsp;<v-icon>fas fa-user-plus</v-icon>
         </v-btn>
+
+        <div
+          v-if='$store.state.isUserLoggedIn'
+          flat
+          dark>
+          <h3  class="headline mb-0" style="margin-top: 15px">Hi~{{$store.state.user.email}}</h3>
+        </div>
+
         <v-btn
           flat
           dark
@@ -50,6 +74,7 @@
           @click="navigateTo({name: 'login'})">
             登录&nbsp;&nbsp;<v-icon>fas fa-sign-in-alt</v-icon>
         </v-btn>
+
         <v-btn
           flat
           dark

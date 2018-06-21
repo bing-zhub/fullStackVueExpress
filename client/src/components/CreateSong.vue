@@ -2,7 +2,7 @@
   <v-app>
     <v-content>
       <v-container fluid fill-height>
-        <v-layout>
+        <v-layout align-center justify-center>
           <v-flex xs6>
             <panel title="Song Metadata">
               <v-card-text>
@@ -45,14 +45,6 @@
                     required
                     :rules="[rules.required]"
                     v-model="song.albumImageUrl">
-                  </v-text-field>
-
-                  <v-text-field
-                    label="YoutubeID"
-                    type="text"
-                    required
-                    :rules="[rules.required]"
-                    v-model="song.youtubeID">
                   </v-text-field>
 
                   <v-text-field
@@ -106,11 +98,10 @@ export default {
     return {
       song: {
         title: '',
-        aritist: '',
+        artist: '',
         genre: '',
         album: '',
         albumImageUrl: '',
-        youtubeID: '',
         lyrics: '',
         tab: ''
       },
@@ -137,14 +128,13 @@ export default {
         }
 
         const response = await SongsService.post({
-          title: this.title,
-          artist: this.artist,
-          genre: this.genre,
-          album: this.album,
-          albumImageUrl: this.albumImageUrl,
-          youtubeID: this.youtubeID,
-          lyrics: this.lyrics,
-          tab: this.tab
+          title: this.song.title,
+          artist: this.song.artist,
+          genre: this.song.genre,
+          album: this.song.album,
+          albumImageUrl: this.song.albumImageUrl,
+          lyrics: this.song.lyrics,
+          tab: this.song.tab
         })
         console.log(response.data)
       } catch (err) {

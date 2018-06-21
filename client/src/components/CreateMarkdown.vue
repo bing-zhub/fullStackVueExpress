@@ -4,7 +4,7 @@
       <v-container fluid fill-height>
         <v-layout>
           <v-flex>
-            <panel title="Markdown Metadata">
+            <panel title="Markdown Metadata" style="margin-top: 30px">
               <v-card-text>
                 <v-form>
                   <v-text-field

@@ -1,12 +1,20 @@
 <template>
-  <video-player
-    class="video-player-box"
-    ref="videoPlayer"
-    :options="playerOptions"
-    :playsinline="true"
-    customEventName="customstatechangedeventname"
-    @ready="playerReadied">
-  </video-player>
+<v-app>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <video-player
+            class="video-player-box"
+            ref="videoPlayer"
+            :options="playerOptions"
+            :playsinline="true"
+            customEventName="customstatechangedeventname"
+            @ready="playerReadied">
+          </video-player>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>

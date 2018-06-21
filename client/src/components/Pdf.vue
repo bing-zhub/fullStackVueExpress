@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 20px">
     <v-btn primary :disabled="currentPage===1" @click="currentPage-=1">
       上一页
     </v-btn>
@@ -8,7 +8,7 @@
       下一页
     </v-btn>
     <pdf
-      src="https://cdn.mozilla.net/pdfjs/tracemonkey.pdf"
+      src="http://palvg171j.bkt.clouddn.com/2018%E8%AE%B2%E4%B9%89_Wed%20Jun%2020%202018_3907.pdf"
       @num-pages="pageCount = $event"
       @page-loaded="currentPage = $event"
       :page="currentPage"

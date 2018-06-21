@@ -26,11 +26,9 @@
                 class="black--text"
                 v-for="song in songs"
                 :key="song.id">
-                <v-card-text color="black">{{song.title}} |
-                  {{song.artist}} | {{song.album}} |
-                  {{song.genre}} | {{song.albumImageUrl}} |
-                  {{song.youtubeID}} | {{song.lyrics}} |
-                  {{song.tab}}
+                <v-card-text color="black">
+                  {{song.genre}}     {{song.title}}
+                  {{song.artist}}    {{song.album}}
                 </v-card-text>
                 <v-btn
                 color="primary"
