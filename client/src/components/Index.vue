@@ -18,6 +18,7 @@
                 <a @click="navigateTo({
                       name: 'root'
                     })" class="body-2">Home</a>
+                    <p>最近进入考试周,比较忙commit就水水得了</p>
                 <a href="https://github.com/bing-zhub" class="body-2">Github</a>
               </v-layout>
             </div>
