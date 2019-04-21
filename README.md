@@ -9,7 +9,7 @@
 
 前后端使用axios完成RESTfull交互
 
-## Getting start
+## Getting started
 
 1.`git clone https://github.com/bing-zhub/fullStackVueExpress.git`
 
@@ -20,6 +20,7 @@
 3.`cd client`
 
 4.`cnpm install`
+
 5.`npm run start`
 
 ### server
@@ -55,65 +56,65 @@ module.exports = {
 
 ### 前端 vue 使用vue-cli的webpack模板
 
-#### axios api请求工具
+- axios api请求工具
 
 基于promise的HTTP客户端
 
-#### vuex状态管理
+- vuex状态管理
 
 ```
 用户的登录状态, 页面路由状态等
 ```
 
-#### vue-router 前端路由
+- vue-router 前端路由
 
 ```
 对前端url进行解析, 指向不同界面
 ```
 
-#### vuetify 前端组件
+- vuetify 前端组件
 
 ```
 一个符合MaterialDesign的前端组件库 对vue支持甚好
 ```
 
-#### font awesome
+- fontawesome
 
 ```
 前端图标库: 图标组件库
 ```
 
-#### quillEditor
+- quillEditor
 
 ```
 富文本编辑器: 作用户编辑用(todo)
 ```
 
-#### editor.md,simplemde-markdown-editor
+- editor.md,simplemde-markdown-editor
 
 ```
 Markdown编辑器: 一个高生产力markdown工具(todo)
 ```
 
-#### video player (to do)
+- video player (to do)
 
 ### 后端 express
 
-#### bcrypt-nodejs sha256加密工具
+- bcrypt-nodejs sha256加密工具
 
-#### bluebird promisify工具
+- bluebird promisify工具
 
-#### body-parser api请求解析工具
+- body-parser api请求解析工具
 
-#### cors 跨域请求工具
+- cors 跨域请求工具
 
-#### joi 数据模型验证
+- joi 数据模型验证
 
-#### jsonwebtoken 用户身份信息认证
+- jsonwebtoken 用户身份信息认证
 
-#### morgan 日志中间件
+- morgan 日志中间件
 
-#### sequelize 基于promise的ORM工具,用于数据库交互
+- sequelize 基于promise的ORM工具,用于数据库交互
 
 ### 数据库 mysql
 
